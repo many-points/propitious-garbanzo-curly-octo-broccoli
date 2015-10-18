@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript">
+var ttable, tstyle;
+
+document.addEventListener("DOMContentLoaded", function(event) {
+	ttable = load_xml("http://localhost:8000/ttable.xml");
+	tstyle = load_xml("http://localhost:8000/ttable.xsl");
+});
+
+var load_xml = function (name) {
+    console.log('load_xml call');
+    if (window.XMLHttpRequest) {
+    	xhttp = new XMLHttpRequest();
+    }
+    else {
+    	xhttp = new ActiveXObject("Microsoft.XMLDOM");
+    }
+    xhttp.open("GET", name, false);
+    xhttp.send();
+
+    return xhttp.responseXML;
+};
+
+var display_result = function (xml, xsl) {
+	xsltp = new XSLTProcessor();
+	xsltp.importStylesheet(xsl);
+	result = xsltp.transformToFragment(xml, document);
+	document.getElementById("example").appendChild(result);
+};
+
+
+</script>
+</head>
+<body id="example" onload="display_result(ttable,tstyle)">
+
+</body>
+</html>

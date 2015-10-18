@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<div class="xml" hidden>
+</div>
+<script type="text/javascript">
+
+var XML_DOCUMENT;
+
+var xml_listener = function (e) {
+	XML_DOCUMENT = this.responseXML;
+	console.log(XML_DOCUMENT);
+}
+
+var load_xml = function (name) {
+    console.log('load_xml call');
+    if (window.XMLHttpRequest) {
+    	xhttp = new XMLHttpRequest();
+    }
+    else {
+    	xhttp = new ActiveXObject("Microsoft.XMLDOM");
+    }
+    xhttp.addEventListener("load", xml_listener);
+    xhttp.open("GET", name);
+    xhttp.send();
+};
+
+load_xml("http://localhost:8000/timetable.xml");
+
+</script>
+</body>
+</html>

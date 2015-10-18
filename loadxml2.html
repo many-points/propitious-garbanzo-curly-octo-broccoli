@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="loadxml.js" ></script>
+</head>
+<body>
+<script type="text/javascript">
+
+var XMLD; //for debugging, remove later
+
+var xml_listener = function (e) {
+	XMLD = this.responseXML;
+	xml_(this.responseXML);
+}
+
+var load_xml = function (name) {
+    console.log('load_xml call');
+    if (window.XMLHttpRequest) {
+    	xhttp = new XMLHttpRequest();
+    }
+    else {
+    	xhttp = new ActiveXObject("Microsoft.XMLDOM");
+    }
+    xhttp.addEventListener("load", xml_listener);
+    xhttp.open("GET", name);
+    xhttp.send();
+};
+
+load_xml("http://localhost:8000/timetable.xml");
+
+//XML MANIPULATION CODE GOES HERE
+var xml_ = function (XML_DOCUMENT) {
+	var x, y;
+	x = XML_DOCUMENT.getElementsByTagName("subject");
+
+	for (i=0; i<x.length; i++) {
+		document.write(x[i].childNodes[0].nodeValue);
+		document.write("<br>");
+	}
+	document.write("<br>");
+
+	x = XML_DOCUMENT.getElementsByTagName("subject")[0].childNodes[0];
+	x.nodeValue = "Javascript programming";
+
+	x = XML_DOCUMENT.getElementsByTagName("subject");
+
+	for (i=0; i<x.length; i++) {
+		document.write(x[i].childNodes[0].nodeValue);
+		document.write("<br>");
+	}
+	document.write("<br>");
+
+	x = XML_DOCUMENT.getElementsByTagName("lesson")[0].childNodes;
+	y = XML_DOCUMENT.getElementsByTagName("lesson")[0].firstChild;
+
+	for (i = 0; i < x.length; i++) {
+		if (y.nodeType == 1) {
+			document.write(y.nodeName + "<br />");
+		}
+		y = y.nextSibling;
+	}
+};
+
+</script>
+</body>
+</html>
