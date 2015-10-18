@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gradeReport[
+  <!ELEMENT gradeReport (date*)>
+  <!ELEMENT gradeReport (subject*)>
+  <!ELEMENT gradeReport (examiner*)>
+  <!ELEMENT gradeReport (gradeList*)>
+  <!ELEMENT date (#PCDATA)>
+  <!ELEMENT subject (#PCDATA)>
+  <!ELEMENT examiner (#PCDATA)>
+  <!ELEMENT gradeList (gradeRecord+)>
+  <!ELEMENT gradeRecord (student, grade)>
+  <!ELEMENT student (#PCDATA)>
+  <!ELEMENT grade (#PCDATA)>
+  <!ATTLIST gradeReport
+          id CDATA #REQUIRED>
+  <!ATTLIST gradeRecord
+          id CDATA #REQUIRED>
+]>
